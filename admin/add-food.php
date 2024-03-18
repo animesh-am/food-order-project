@@ -152,7 +152,10 @@
                     if($image_name != "")
                     {
                         // Rename the image --> Get the extension (.jpg, .png, ,jpeg, etc.)
-                        $ext = end(explode('.', $image_name));
+                        $parts = explode('.', $image_name);
+                        $ext = end($parts);
+
+                        
                         
                         // Create new name for image
                         $image_name = "Food-Name-".rand(0000,9999).".".$ext;
