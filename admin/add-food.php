@@ -155,8 +155,6 @@
                         $parts = explode('.', $image_name);
                         $ext = end($parts);
 
-                        
-                        
                         // Create new name for image
                         $image_name = "Food-Name-".rand(0000,9999).".".$ext;
 
@@ -174,6 +172,7 @@
                             header('location:'.SITEURL.'admin/food.php');
 
                             // Stop the process
+                            die();
                         }
 
                         
@@ -206,14 +205,16 @@
                     // Data inserted successfully
                     $_SESSION['add'] = "<div class='success'>Food Added Successfully.</div>";
                     // Redirect to manage food
-                    header("location:".SITEURL."admin/manage-food.php");
+                    header('location:'.SITEURL.'admin/manage-food.php');
+                    die();
                 }
                 else
                 {
                     // Failed to insert data
                     $_SESSION['add'] = "<div class='error'>FAILED to Add Food.</div>";
                     // Redirect to manage food
-                    header("location:".SITEURL."admin/manage-food.php");
+                    header('location:'.SITEURL.'admin/manage-food.php');
+                    die();
                 }
 
 
