@@ -94,7 +94,8 @@
                     {
                         // Auto-Renaming the image
                         // First get the extension of the image (jpg, png, gif, etc.)
-                        $ext = end(explode('.', $image_name));
+                        $parts = explode('.', $image_name);
+                        $ext = end($parts);
 
                         // Rename the image
                         $image_name = "Food_category_" . rand(000,999) . '.' . $ext;
@@ -147,6 +148,7 @@
                 else
                 {
                     // Failed to add category
+
                     $_SESSION['add'] = "<div class='error'>FAILED to add Category.</div>";
                     // Redirect to add category
                     header('location:'.SITEURL.'admin/add-category.php');

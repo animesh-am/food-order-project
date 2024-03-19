@@ -24,7 +24,7 @@
                 <tr>
                     <td class="label-cell">Description: </td>
                     <td>
-                        <textarea name="description" id="" cols="37" rows="5" placeholder="Description of the Food"
+                        <textarea name="description" cols="37" rows="5" placeholder="Description of the Food"
                             class="input-field"></textarea>
                     </td>
                 </tr>
@@ -172,12 +172,13 @@
                             header('location:'.SITEURL.'admin/add-food.php');
 
                             // Stop the process
-                            die();
+                            exit();
                         }
-
-                        
-                        
                     }
+                    else
+                    {
+                        $image_name = "";
+                    }       
                 }
                 else
                 {
@@ -206,7 +207,7 @@
                     $_SESSION['add'] = "<div class='success'>Food Added Successfully.</div>";
                     // Redirect to manage food
                     header('location:'.SITEURL.'admin/manage-food.php');
-                    die();
+                    exit();
                 }
                 else
                 {
