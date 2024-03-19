@@ -169,7 +169,7 @@
                         {
                             $_SESSION['upload'] = "<div class='error'>Failed to Upload Image.</div>";
                             // Redirect to add food
-                            header('location:'.SITEURL.'admin/food.php');
+                            header('location:'.SITEURL.'admin/add-food.php');
 
                             // Stop the process
                             die();
@@ -218,7 +218,6 @@
                 }
 
 
-                // Redirect to manage food page with message
 
             }
         ?>
