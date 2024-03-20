@@ -1,4 +1,4 @@
-<?php include('partials/menu.php')?>
+<?php include('partials/menu.php') ?>
 <div class="main-content">
     <div class="wrapper">
         <h1>Add Admin</h1>
@@ -6,10 +6,10 @@
         <br><br>
 
         <?php
-            if(isset($_SESSION['add'])){
-                echo $_SESSION["add"]; // Display session message if set
-                unset($_SESSION["add"]); // Remove session message
-            }
+        if (isset($_SESSION['add'])) {
+            echo $_SESSION["add"]; // Display session message if set
+            unset($_SESSION["add"]); // Remove session message
+        }
         ?>
         <form action="" method="POST">
             <table class="tbl-30">
@@ -40,40 +40,39 @@
         </form>
     </div>
 </div>
-<?php include('partials/footer.php')?>
+<?php include('partials/footer.php') ?>
 
 <?php
-    // Process the value from Form and save it in Database
-    // Check whether the submit button is clicked or not
+// Process the value from Form and save it in Database
+// Check whether the submit button is clicked or not
 
-    if(isset($_POST['submit'])) {
-        // TODO: Get the data from form
-        $full_name = $_POST['full_name'];
-        $username = $_POST['username'];
-        $password = md5($_POST['password']); //password encrypted with md5
-        
-        // TODO: SQL query to save the data into database
-        $sql = "INSERT INTO tbl_admin SET 
+if (isset($_POST['submit'])) {
+    // TODO: Get the data from form
+    $full_name = mysqli_real_escape_string($conn, $_POST['full_name']);
+    $username = mysqli_real_escape_string($conn, $_POST['username']);
+    $password = mysqli_real_escape_string($conn, md5($_POST['password'])); //password encrypted with md5
+
+    // TODO: SQL query to save the data into database
+    $sql = "INSERT INTO tbl_admin SET 
                 full_name='$full_name',
                 username = '$username',
                 password = '$password';
                 ";
-        
-        
-        // Execute Query and Save data in Database
-        $res = mysqli_query($conn, $sql) or die(mysqli_error());
 
-        // Check data is inserted into table and display message
-        if($res){
-            // Create session variable to Display Message
-            $_SESSION['add'] = "<div class='success'>Admin <strong>ADDED</strong> Successfully.</div>";
-            // Redirect Page to Manage Admin
-            header("location:".SITEURL."admin/manage-admin.php");
-        }
-        else{
-            // Create session variable to Display Message
-            $_SESSION["add"] = "Failed to Add Admin.";
-        }
+
+    // Execute Query and Save data in Database
+    $res = mysqli_query($conn, $sql) or die(mysqli_error());
+
+    // Check data is inserted into table and display message
+    if ($res) {
+        // Create session variable to Display Message
+        $_SESSION['add'] = "<div class='success'>Admin <strong>ADDED</strong> Successfully.</div>";
+        // Redirect Page to Manage Admin
+        header("location:" . SITEURL . "admin/manage-admin.php");
+    } else {
+        // Create session variable to Display Message
+        $_SESSION["add"] = "Failed to Add Admin.";
     }
-    
+}
+
 ?>

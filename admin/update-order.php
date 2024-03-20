@@ -77,32 +77,28 @@
                 <tr>
                     <td class="label-cell">Customer Name : </td>
                     <td>
-                        <input type="text" name="customer_name" value="<?php echo $customer_name; ?>"
-                            class="input-field">
+                        <input type="text" name="customer_name" value="<?php echo $customer_name; ?>" class="input-field">
                     </td>
                 </tr>
 
                 <tr>
                     <td class="label-cell">Customer Contact : </td>
                     <td>
-                        <input type="text" name="customer_contact" value="<?php echo $customer_contact; ?>"
-                            class="input-field">
+                        <input type="text" name="customer_contact" value="<?php echo $customer_contact; ?>" class="input-field">
                     </td>
                 </tr>
 
                 <tr>
                     <td class="label-cell">Customer Email : </td>
                     <td>
-                        <input type="text" name="customer_email" value=<?php echo $customer_email; ?>"
-                            class="input-field">
+                        <input type="text" name="customer_email" value=<?php echo $customer_email; ?>" class="input-field">
                     </td>
                 </tr>
 
                 <tr>
                     <td class="label-cell">Customer Address : </td>
                     <td>
-                        <textarea name="customer_address" cols="30" rows="5"
-                            class="input-field"><?php echo $customer_address; ?></textarea>
+                        <textarea name="customer_address" cols="30" rows="5" class="input-field"><?php echo $customer_address; ?></textarea>
                     </td>
                 </tr>
 
@@ -121,17 +117,17 @@
         // Check whether update button is clicked or not
         if (isset($_POST['submit'])) {
             // Get all the details from form
-            $id = $_POST['id'];
-            $price = $_POST['price'];
-            $quantity = $_POST['quantity'];
+            $id = mysqli_real_escape_string($conn, $_POST['id']);
+            $price = mysqli_real_escape_string($conn, $_POST['price']);
+            $quantity = mysqli_real_escape_string($conn, $_POST['quantity']);
 
             $total = $price * $quantity;
 
-            $status = $_POST['status'];
-            $customer_name = $_POST['customer_name'];
-            $customer_contact = $_POST['customer_contact'];
-            $customer_email = $_POST['customer_email'];
-            $customer_address = $_POST['customer_address'];
+            $status = mysqli_real_escape_string($conn, $_POST['status']);
+            $customer_name = mysqli_real_escape_string($conn, $_POST['customer_name']);
+            $customer_contact = mysqli_real_escape_string($conn, $_POST['customer_contact']);
+            $customer_email = mysqli_real_escape_string($conn, $_POST['customer_email']);
+            $customer_address = mysqli_real_escape_string($conn, $_POST['customer_address']);
 
             // Update the values
             $sql2 = "UPDATE tbl_order SET

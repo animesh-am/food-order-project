@@ -6,7 +6,7 @@
     <div class="container">
         <?php
         // Get the searched keyeword
-        $search = $_POST['search'];
+        $search = mysqli_real_escape_string($conn, $_POST['search']);
         ?>
 
         <h2>Foods similar to your search - <a href="#" class="text-white">"<?php echo $search; ?>"</a></h2>
@@ -24,7 +24,7 @@
 
         <?php
         // SQL for getting foods based on the search keyword
-        $sql = "SELECT * FROM tbl_food WHERE title like '%$search%' OR description LIKE '%$search%'";
+        $sql = "SELECT * FROM tbl_food WHERE title LIKE '%$search%' OR description LIKE '%$search%'";
         $res = mysqli_query($conn, $sql);
         $count = mysqli_num_rows($res);
 

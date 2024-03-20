@@ -7,11 +7,10 @@
         <br><br>
 
         <?php
-            if(isset($_SESSION['upload']))
-            {
-                echo $_SESSION['upload'];
-                unset($_SESSION['upload']);
-            }
+        if (isset($_SESSION['upload'])) {
+            echo $_SESSION['upload'];
+            unset($_SESSION['upload']);
+        }
         ?>
 
         <form action="" method="POST" enctype="multipart/form-data">
@@ -48,7 +47,7 @@
                     <td>
                         <select name="category" class="input-field">
 
-                            <?php 
+                            <?php
                             // PHP code to display categories from database
                             // SQL Query to display categories from database which are 'active'
                             $sql = "SELECT * FROM tbl_category WHERE active='Yes'";
@@ -59,28 +58,24 @@
                             // Count rows to check whether we have categories or not
                             $count = mysqli_num_rows($res);
 
-                            if ($count > 0)
-                            {
+                            if ($count > 0) {
                                 // We have categories
-                                while( $row = mysqli_fetch_assoc($res) )    
-                                {
+                                while ($row = mysqli_fetch_assoc($res)) {
                                     // Get the details of category
                                     $id = $row['id'];
                                     $title = $row['title'];
 
-                                    ?>
+                            ?>
                             <option value="<?php echo $id; ?>"><?php echo $title; ?></option>
                             <?php
                                 }
-                            }
-                            else
-                            {
+                            } else {
                                 // We do not have categories
                                 ?>
                             <option value="0">No Category Found.</option>
                             <?php
                             }
-                        ?>
+                            ?>
 
                         </select>
                     </td>
@@ -114,81 +109,67 @@
 
 
         <?php
-            // Check whether the button is clicked or not
-            if(isset($_POST['submit']))
-            {
-                // Get the data from form
-                $title = $_POST['title'];
-                $description = $_POST['description'];
-                $price = $_POST['price'];
-                $category = $_POST['category'];
-                
-                // Check whether radio button are clicked or not
-                if(isset($_POST['featured']))
-                {
-                    $featured = $_POST['featured'];
-                }
-                else
-                {
-                    $featured = "No"; // Setting default value
-                }
+        // Check whether the button is clicked or not
+        if (isset($_POST['submit'])) {
+            // Get the data from form
+            $title = mysqli_real_escape_string($conn, $_POST['title']);
+            $description = mysqli_real_escape_string($conn, $_POST['description']);
+            $price = mysqli_real_escape_string($conn, $_POST['price']);
+            $category = mysqli_real_escape_string($conn, $_POST['category']);
 
-                if(isset($_POST['active']))
-                {
-                    $active = $_POST['active'];
-                }
-                else
-                {
-                    $active = "No"; // Setting default value
-                }
+            // Check whether radio button are clicked or not
+            if (isset($_POST['featured'])) {
+                $featured = mysqli_real_escape_string($conn,$_POST['featured']);
+            } else {
+                $featured = "No"; // Setting default value
+            }
 
-                // Upload the image if selected
-                if(isset($_FILES["image"]['name']))
-                {
-                    // Get the details of the selected image
-                    $image_name = $_FILES['image']['name'];
+            if (isset($_POST['active'])) {
+                $active = mysqli_real_escape_string($conn,$_POST['active']);
+            } else {
+                $active = "No"; // Setting default value
+            }
 
-                    // Check wheteher the image is selected or not
-                    if($image_name != "")
-                    {
-                        // Rename the image --> Get the extension (.jpg, .png, ,jpeg, etc.)
-                        $parts = explode('.', $image_name);
-                        $ext = end($parts);
+            // Upload the image if selected
+            if (isset($_FILES["image"]['name'])) {
+                // Get the details of the selected image
+                $image_name = $_FILES['image']['name'];
 
-                        // Create new name for image
-                        $image_name = "Food-Name-".rand(0000,9999).".".$ext;
+                // Check wheteher the image is selected or not
+                if ($image_name != "") {
+                    // Rename the image --> Get the extension (.jpg, .png, ,jpeg, etc.)
+                    $parts = explode('.', $image_name);
+                    $ext = end($parts);
 
-                        // Upload the image
-                        $src = $_FILES['image']['tmp_name']; // source path
+                    // Create new name for image
+                    $image_name = "Food-Name-" . rand(0000, 9999) . "." . $ext;
 
-                        $dst = "../images/food/".$image_name;
-                        // Upload image
-                        $upload = move_uploaded_file($src, $dst);
-                        // Check whether image uploaded or not
-                        if($upload == false)
-                        {
-                            $_SESSION['upload'] = "<div class='error'>Failed to Upload Image.</div>";
-                            // Redirect to add food
-                            header('location:'.SITEURL.'admin/add-food.php');
+                    // Upload the image
+                    $src = $_FILES['image']['tmp_name']; // source path
 
-                            // Stop the process
-                            exit();
-                        }
+                    $dst = "../images/food/" . $image_name;
+                    // Upload image
+                    $upload = move_uploaded_file($src, $dst);
+                    // Check whether image uploaded or not
+                    if ($upload == false) {
+                        $_SESSION['upload'] = "<div class='error'>Failed to Upload Image.</div>";
+                        // Redirect to add food
+                        header('location:' . SITEURL . 'admin/add-food.php');
+
+                        // Stop the process
+                        exit();
                     }
-                    else
-                    {
-                        $image_name = "";
-                    }       
+                } else {
+                    $image_name = "";
                 }
-                else
-                {
-                    $image_name = ""; // Setting default value as button is not clicked
-                }
+            } else {
+                $image_name = ""; // Setting default value as button is not clicked
+            }
 
 
-                // Insert into database
-                // For numerical we do not need to pass value inside quotes '' but for string value it is compulsory to add quotes ''
-                $sql2 = "INSERT INTO tbl_food SET
+            // Insert into database
+            // For numerical we do not need to pass value inside quotes '' but for string value it is compulsory to add quotes ''
+            $sql2 = "INSERT INTO tbl_food SET
                         title='$title',
                         description='$description', 
                         price=$price,     
@@ -198,29 +179,23 @@
                         active = '$active'
                         ";
 
-                $res2 = mysqli_query($conn, $sql2);
+            $res2 = mysqli_query($conn, $sql2);
 
-                // Check whether data is inserted or not
-                if($res2)
-                {
-                    // Data inserted successfully
-                    $_SESSION['add'] = "<div class='success'>Food Added Successfully.</div>";
-                    // Redirect to manage food
-                    header('location:'.SITEURL.'admin/manage-food.php');
-                    exit();
-                }
-                else
-                {
-                    // Failed to insert data
-                    $_SESSION['add'] = "<div class='error'>FAILED to Add Food.</div>";
-                    // Redirect to manage food
-                    header('location:'.SITEURL.'admin/manage-food.php');
-                    die();
-                }
-
-
-
+            // Check whether data is inserted or not
+            if ($res2) {
+                // Data inserted successfully
+                $_SESSION['add'] = "<div class='success'>Food Added Successfully.</div>";
+                // Redirect to manage food
+                header('location:' . SITEURL . 'admin/manage-food.php');
+                exit();
+            } else {
+                // Failed to insert data
+                $_SESSION['add'] = "<div class='error'>FAILED to Add Food.</div>";
+                // Redirect to manage food
+                header('location:' . SITEURL . 'admin/manage-food.php');
+                die();
             }
+        }
         ?>
 
     </div>

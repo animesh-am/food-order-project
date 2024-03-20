@@ -6,40 +6,33 @@
         <h1>Update Admin</h1>
         <br><br>
 
-        <?php 
-            // Get the id of selected Admin
-            $id = $_GET["id"];
+        <?php
+        // Get the id of selected Admin
+        $id = $_GET["id"];
 
-            // Create SQL Query to update the details
-            $sql = "SELECT * FROM tbl_admin WHERE id=$id";
+        // Create SQL Query to update the details
+        $sql = "SELECT * FROM tbl_admin WHERE id=$id";
 
-            // Execute the Query
-            $res = mysqli_query($conn,$sql);
+        // Execute the Query
+        $res = mysqli_query($conn, $sql);
 
-            // Check whether the query is executed or not
-            if($res)
-            {
-                // Check whether data is available or not
-                $count = mysqli_num_rows($res);
-                // Check whether we have admin data or not
-                if($count==1)
-                {
-                    // Get the details
-                    $row = mysqli_fetch_assoc($res);
+        // Check whether the query is executed or not
+        if ($res) {
+            // Check whether data is available or not
+            $count = mysqli_num_rows($res);
+            // Check whether we have admin data or not
+            if ($count == 1) {
+                // Get the details
+                $row = mysqli_fetch_assoc($res);
 
-                    $full_name = $row["full_name"];
-                    $username = $row["username"];
-
-
-
-                }
-                else
-                {
-                    // Redirect to manage-admin.php
-                    header("location:".SITEURL."admin/manage-admin.php");
-                }
+                $full_name = $row["full_name"];
+                $username = $row["username"];
+            } else {
+                // Redirect to manage-admin.php
+                header("location:" . SITEURL . "admin/manage-admin.php");
             }
-            
+        }
+
         ?>
 
 
@@ -74,38 +67,36 @@
 </div>
 
 <?php
-    // Check whether the submit button is clicked or not
-    if(isset($_POST['submit']))
-    {
-        // Get all the values from form to update
-        $id = $_POST['id'];
-        $full_name = $_POST['full_name'];
-        $username = $_POST['username'];
+// Check whether the submit button is clicked or not
+if (isset($_POST['submit'])) {
+    // Get all the values from form to update
+    $id = mysqli_real_escape_string($conn, $_POST['id']);
+    $full_name = mysqli_real_escape_string($conn, $_POST['full_name']);
+    $username = mysqli_real_escape_string($conn, $_POST['username']);
 
-        // Create SQL Query to update
-        $sql = "UPDATE tbl_admin SET
+    // Create SQL Query to update
+    $sql = "UPDATE tbl_admin SET
                 full_name = '$full_name',
                 username = '$username'
                 WHERE id=$id
                 ";
-        
-        // Execute the query
-        $res = mysqli_query($conn,$sql);
 
-        // Check whether the query is executed successfully or not
-        if($res){
-            // Admin updated
-            $_SESSION['update'] = "<div class='success'>Admin  <strong>UPDATED</strong> successfully.</div>";
-            // Redirect to Admin Page
-            header("location:".SITEURL."admin/manage-admin.php");
-        }
-        else{
-            // Failed to update Admin
-            $_SESSION['update'] = "<div class='error'><strong>FAILED</strong> to update Admin.</div>";
-            // Redirect to Admin Page
-            header("location:".SITEURL."admin/manage-admin.php");
-        }
+    // Execute the query
+    $res = mysqli_query($conn, $sql);
+
+    // Check whether the query is executed successfully or not
+    if ($res) {
+        // Admin updated
+        $_SESSION['update'] = "<div class='success'>Admin  <strong>UPDATED</strong> successfully.</div>";
+        // Redirect to Admin Page
+        header("location:" . SITEURL . "admin/manage-admin.php");
+    } else {
+        // Failed to update Admin
+        $_SESSION['update'] = "<div class='error'><strong>FAILED</strong> to update Admin.</div>";
+        // Redirect to Admin Page
+        header("location:" . SITEURL . "admin/manage-admin.php");
     }
+}
 ?>
 
 <?php include("partials/footer.php") ?>
