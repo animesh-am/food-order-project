@@ -63,6 +63,7 @@ table tr th {
     border-bottom: 1px solid black;
     padding: 1%;
     text-align: left;
+    text-align: center;
 }
 
 table tr td {
@@ -173,7 +174,7 @@ table tr td {
 /* CSS for main content */
 .main-content {
     background-color: #ebe6e6;
-    padding: 3% 0%;
+    padding: 0% 0%;
 }
 
 .col-4 {

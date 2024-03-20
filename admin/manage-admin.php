@@ -46,10 +46,10 @@
 
         <table class="tbl-full">
             <tr>
-                <th>S.No.</th>
-                <th>Full Name</th>
-                <th>Username</th>
-                <th>Actions</th>
+                <th class="text-center">S.No.</th>
+                <th class="text-center">Full Name</th>
+                <th class="text-center">Username</th>
+                <th class="text-center">Actions</th>
             </tr>
 
             <?php
@@ -79,10 +79,10 @@
                             ?>
 
             <tr>
-                <td><?php echo $sn++; ?></td>
-                <td><?php echo $full_name; ?></td>
-                <td><?php echo $username; ?></td>
-                <td>
+                <td class="text-center"><?php echo $sn++; ?></td>
+                <td class="text-center"><?php echo $full_name; ?></td>
+                <td class="text-center"><?php echo $username; ?></td>
+                <td class="text-center">
                     <a href="<?php echo SITEURL; ?>admin/update-password.php?id=<?php echo $id ?>"
                         class="btn-primary">Change Password</a>
                     <a href="<?php echo SITEURL; ?>admin/update-admin.php?id=<?php echo $id ?>"

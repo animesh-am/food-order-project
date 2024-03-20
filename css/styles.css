@@ -94,14 +94,57 @@ a:hover {
 }
 
 .btn-primary {
-    background-color: #ff6b81;
+    background-color: #5db1ed;
+    padding: 8px 16px;
     color: white;
-    cursor: pointer;
+    font-weight: bold;
+    border: 2px solid #2010b3;
+    border-radius: 20px;
+    transition: background-color 1s ease;
 }
 
 .btn-primary:hover {
     color: white;
-    background-color: #ff4757;
+    background-color: #0035b0;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.btn-danger {
+    background-color: #f75c64;
+    padding: 8px 16px;
+    color: white;
+    font-weight: bold;
+    border: 2px solid #bd010b;
+    border-radius: 20px;
+    transition: background-color 1s ease;
+}
+
+.btn-danger:hover {
+    color: white;
+    background-color: #e7002a;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.success,
+.error {
+    padding: 15px 20px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    font-weight: bold;
+}
+
+.success {
+    background-color: #2ecc71;
+    color: #ffffff;
+    border: 3px solid #27ae60;
+    box-shadow: 0 4px 8px rgba(46, 204, 113, 0.3);
+}
+
+.error {
+    background-color: #e74c3c;
+    color: #ffffff;
+    border: 3px solid #c0392b;
+    box-shadow: 0 4px 8px rgba(231, 76, 60, 0.3);
 }
 
 h2 {

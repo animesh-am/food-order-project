@@ -10,7 +10,7 @@
     <title>Moody Foody</title>
 
     <!-- Link our CSS file -->
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/styles.css">
 </head>
 
 <body>
