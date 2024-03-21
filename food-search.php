@@ -38,35 +38,37 @@
                 $description = $row['description'];
                 $image_name = $row['image_name'];
         ?>
-                <div class="food-menu-box">
-                    <div class="food-menu-img">
-                        <?php
+        <div class="food-menu-box">
+            <div class="food-menu-img">
+                <?php
                         if ($image_name == "") {
                             // Image Not Available
                             echo "<div class='error'>Image Not Available.</div>";
                         } else {
                             // Image Available
                         ?>
-                            <img src="<?php echo SITEURL; ?>images/food/<?php echo $image_name; ?>" alt="Food" class="img-responsive img-curve">
-                        <?php
+                <img src="<?php echo SITEURL; ?>images/food/<?php echo $image_name; ?>" alt="Food"
+                    class="img-responsive img-curve">
+                <?php
 
                         }
 
                         ?>
 
-                    </div>
+            </div>
 
-                    <div class="food-menu-desc">
-                        <h4><?php echo $title; ?></h4>
-                        <p class="food-price">Rs. <?php echo $price; ?></p>
-                        <p class="food-detail">
-                            <?php echo $description; ?>
-                        </p>
-                        <br>
+            <div class="food-menu-desc">
+                <h4><?php echo $title; ?></h4>
+                <p class="food-price">Rs. <?php echo $price; ?></p>
+                <p class="food-detail">
+                    <?php echo $description; ?>
+                </p>
+                <br>
 
-                        <a href="#" class="btn btn-primary">Order Now</a>
-                    </div>
-                </div>
+                <a href="<?php echo SITEURL; ?>order.php?food_id=<?php echo $id; ?>" class="btn btn-primary">Order
+                    Now</a>
+            </div>
+        </div>
         <?php
             }
         } else {
