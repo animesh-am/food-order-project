@@ -44,24 +44,23 @@ if (isset($_SESSION['order'])) {
                 $image_name = $row['image_name'];
         ?>
 
-        <a href="<?php echo SITEURL; ?>category-foods.php?category_id=<?php echo $id; ?>">
-            <div class="box-3 float-container">
-                <?php
+                <a href="<?php echo SITEURL; ?>category-foods.php?category_id=<?php echo $id; ?>">
+                    <div class="box-3 float-container">
+                        <?php
                         // Check whether image is available or not
                         if ($image_name == "") {
                             echo "<div class='error'>Image Not Available</div>";
                         } else {
                         ?>
-                <img src="<?php echo SITEURL; ?>images/category/<?php echo $image_name ?>" alt="Pizza"
-                    class="img-responsive img-curve">
-                <?php
+                            <img src="<?php echo SITEURL; ?>images/category/<?php echo $image_name; ?>" alt="Pizza" class="img-responsive img-curve">
+                        <?php
                         }
                         ?>
 
 
-                <h3 class="float-text text-white"><?php echo $title; ?></h3>
-            </div>
-        </a>
+                        <h3 class="float-text text-white"><?php echo $title; ?></h3>
+                    </div>
+                </a>
 
         <?php
             }
@@ -97,9 +96,9 @@ if (isset($_SESSION['order'])) {
                 $price = $row['price'];
 
         ?>
-        <div class="food-menu-box">
-            <div class="food-menu-img">
-                <?php
+                <div class="food-menu-box">
+                    <div class="food-menu-img">
+                        <?php
                         // Check if image available or not
                         if ($image_name == '') {
                             // Image not available
@@ -107,26 +106,25 @@ if (isset($_SESSION['order'])) {
                         } else {
                             // Image Available
                         ?>
-                <img src="<?php echo SITEURL; ?>images/food/<?php echo $image_name; ?>" alt="Food Image"
-                    class="img-responsive img-curve">
-                <?php
-                        
+                            <img src="<?php echo SITEURL; ?>images/food/<?php echo $image_name; ?>" alt="Food Image" class="img-responsive img-curve">
+                        <?php
+
                         }
                         ?>
-            </div>
+                    </div>
 
-            <div class="food-menu-desc">
-                <h4><?php echo $title; ?></h4>
-                <p class="food-price">Rs. <?php echo $price; ?></p>
-                <p class="food-detail">
-                    <?php echo $description; ?>
-                </p>
-                <br>
+                    <div class="food-menu-desc">
+                        <h4><?php echo $title; ?></h4>
+                        <p class="food-price">Rs. <?php echo $price; ?></p>
+                        <p class="food-detail">
+                            <?php echo $description; ?>
+                        </p>
+                        <br>
 
-                <a href="<?php echo SITEURL; ?>order.php?food_id=<?php echo $id; ?>" class="btn btn-danger">Order
-                    Now</a>
-            </div>
-        </div>
+                        <a href="<?php echo SITEURL; ?>order.php?food_id=<?php echo $id; ?>" class="btn btn-danger">Order
+                            Now</a>
+                    </div>
+                </div>
         <?php
             }
         } else {

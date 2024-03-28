@@ -1,7 +1,4 @@
-<?php
-$_SESSION['message'] = "<div class='success'>Your message has been sent successfully!</div>";
-header("location:" . SITEURL . "contact.php");
-?>
+<?php include("config/constants.php"); ?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -16,6 +13,13 @@ header("location:" . SITEURL . "contact.php");
 <body>
     <div class="container">
         <h1>Contact Us</h1>
+        <!-- Display session message here -->
+        <?php
+        if (isset($_SESSION['message'])) {
+            echo $_SESSION['message'];
+            unset($_SESSION['message']);
+        }
+        ?>
         <form action="" method="POST">
             <div class="form-group">
                 <label for="name">Your Name:</label>
@@ -33,7 +37,7 @@ header("location:" . SITEURL . "contact.php");
                 <label for="message">Message:</label>
                 <textarea id="message" name="message" rows="5" required></textarea>
             </div>
-            <button type="submit">Send Message</button>
+            <button type="submit" name="submit">Send Message</button>
         </form>
     </div>
 </body>
